@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{turnierBean.id}"/>
+		<f:event type="preRenderView" listener="#{turnierBean.retrieve}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Turnier"/>
+
+	<ui:define name="header">
+		Turnier
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Turnier
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="turnierBeanTurnierName" value="Name:"/>
+			<h:outputText id="turnierBeanTurnierName" value="#{turnierBean.turnier.name}"/>
+			<h:outputText/>
+			<h:outputLabel for="turnierBeanTurnierOrt" value="Ort:"/>
+			<h:outputText id="turnierBeanTurnierOrt" value="#{turnierBean.turnier.ort}"/>
+			<h:outputText/>
+			<h:outputLabel for="turnierBeanTurnierDatum" value="Datum:"/>
+			<h:outputText id="turnierBeanTurnierDatum" value="#{turnierBean.turnier.datum}">
+				<f:convertDateTime type="date"/>
+			</h:outputText>
+			<h:outputText/>
+			<h:outputLabel for="turnierBeanTurnierAnmeldenAb" value="Anmelden Ab:"/>
+			<h:outputText id="turnierBeanTurnierAnmeldenAb" value="#{turnierBean.turnier.anmeldenAb}">
+				<f:convertDateTime type="date"/>
+			</h:outputText>
+			<h:outputText/>
+			<h:outputLabel for="turnierBeanTurnierAnmeldenBis" value="Anmelden Bis:"/>
+			<h:outputText id="turnierBeanTurnierAnmeldenBis" value="#{turnierBean.turnier.anmeldenBis}">
+				<f:convertDateTime type="date"/>
+			</h:outputText>
+			<h:outputText/>
+			<h:outputLabel for="turnierBeanTurnierEmail" value="Email:"/>
+			<h:outputText id="turnierBeanTurnierEmail" value="#{turnierBean.turnier.email}"/>
+			<h:outputText/>
+			<h:outputLabel for="turnierBeanTurnierTurnierbeauftragter" value="Turnierbeauftragter:"/>
+			<h:link id="turnierBeanTurnierTurnierbeauftragter" outcome="/person/view" value="#{turnierBean.turnier.turnierbeauftragter}">
+				<f:param name="id" value="#{turnierBean.turnier.turnierbeauftragter.id}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="turnierBeanTurnierVereine" value="Vereine:"/>
+			<h:dataTable id="turnierBeanTurnierVereine" styleClass="data-table" value="#{forgeview:asList(turnierBean.turnier.vereine)}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Version"/>
+					</f:facet>
+					<h:link outcome="/vereinsmeldung/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemVersion" value="#{_item.version}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Bemerkung"/>
+					</f:facet>
+					<h:link outcome="/vereinsmeldung/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemBemerkung" value="#{_item.bemerkung}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Verein"/>
+					</f:facet>
+					<h:link outcome="/vereinsmeldung/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemVerein" value="#{_item.verein}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

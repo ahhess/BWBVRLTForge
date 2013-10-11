@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{vereinsmeldungBean.id}"/>
+		<f:event type="preRenderView" listener="#{vereinsmeldungBean.retrieve}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Vereinsmeldung"/>
+
+	<ui:define name="header">
+		Vereinsmeldung
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Vereinsmeldung
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="vereinsmeldungBeanVereinsmeldungVersion" value="Version:"/>
+			<h:outputText id="vereinsmeldungBeanVereinsmeldungVersion" value="#{vereinsmeldungBean.vereinsmeldung.version}"/>
+			<h:outputText/>
+			<h:outputLabel for="vereinsmeldungBeanVereinsmeldungSpieler" value="Spieler:"/>
+			<h:dataTable id="vereinsmeldungBeanVereinsmeldungSpieler" styleClass="data-table" value="#{forgeview:asList(vereinsmeldungBean.vereinsmeldung.spieler)}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Spieler"/>
+					</f:facet>
+					<h:link outcome="/spielermeldung/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemSpieler" value="#{_item.spieler}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="vereinsmeldungBeanVereinsmeldungTurnier" value="Turnier:"/>
+			<h:link id="vereinsmeldungBeanVereinsmeldungTurnier" outcome="/turnier/view" value="#{vereinsmeldungBean.vereinsmeldung.turnier}">
+				<f:param name="id" value="#{vereinsmeldungBean.vereinsmeldung.turnier.id}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="vereinsmeldungBeanVereinsmeldungBemerkung" value="Bemerkung:"/>
+			<h:outputText id="vereinsmeldungBeanVereinsmeldungBemerkung" value="#{vereinsmeldungBean.vereinsmeldung.bemerkung}"/>
+			<h:outputText/>
+			<h:outputLabel for="vereinsmeldungBeanVereinsmeldungVerein" value="Verein:"/>
+			<h:link id="vereinsmeldungBeanVereinsmeldungVerein" outcome="/verein/view" value="#{vereinsmeldungBean.vereinsmeldung.verein}">
+				<f:param name="id" value="#{vereinsmeldungBean.vereinsmeldung.verein.id}"/>
+			</h:link>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

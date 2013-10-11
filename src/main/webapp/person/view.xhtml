@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{personBean.id}"/>
+		<f:event type="preRenderView" listener="#{personBean.retrieve}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Person"/>
+
+	<ui:define name="header">
+		Person
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Person
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="personBeanPersonVorname" value="Vorname:"/>
+			<h:outputText id="personBeanPersonVorname" value="#{personBean.person.vorname}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonNachname" value="Nachname:"/>
+			<h:outputText id="personBeanPersonNachname" value="#{personBean.person.nachname}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonStrasse" value="Strasse:"/>
+			<h:outputText id="personBeanPersonStrasse" value="#{personBean.person.strasse}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonPlzOrt" value="Plz Ort:"/>
+			<h:outputText id="personBeanPersonPlzOrt" value="#{personBean.person.plzOrt}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonEmail" value="Email:"/>
+			<h:outputText id="personBeanPersonEmail" value="#{personBean.person.email}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonTelefon" value="Telefon:"/>
+			<h:outputText id="personBeanPersonTelefon" value="#{personBean.person.telefon}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonMobil" value="Mobil:"/>
+			<h:outputText id="personBeanPersonMobil" value="#{personBean.person.mobil}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonPasswort" value="Passwort:"/>
+			<h:outputText id="personBeanPersonPasswort" value="#{personBean.person.passwort}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonTurniere" value="Turniere:"/>
+			<h:dataTable id="personBeanPersonTurniere" styleClass="data-table" value="#{forgeview:asList(personBean.person.turniere)}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name"/>
+					</f:facet>
+					<h:link outcome="/turnier/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemName" value="#{_item.name}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Ort"/>
+					</f:facet>
+					<h:link outcome="/turnier/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemOrt" value="#{_item.ort}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Datum"/>
+					</f:facet>
+					<h:link outcome="/turnier/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemDatum" value="#{_item.datum}">
+							<f:convertDateTime type="date"/>
+						</h:outputText>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Anmelden Ab"/>
+					</f:facet>
+					<h:link outcome="/turnier/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemAnmeldenAb" value="#{_item.anmeldenAb}">
+							<f:convertDateTime type="date"/>
+						</h:outputText>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Anmelden Bis"/>
+					</f:facet>
+					<h:link outcome="/turnier/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemAnmeldenBis" value="#{_item.anmeldenBis}">
+							<f:convertDateTime type="date"/>
+						</h:outputText>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonPassnr" value="Passnr:"/>
+			<h:outputText id="personBeanPersonPassnr" value="#{personBean.person.passnr}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonGeschlecht" value="Geschlecht:"/>
+			<h:outputText id="personBeanPersonGeschlecht" value="#{personBean.person.geschlecht}"/>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonGeburtstag" value="Geburtstag:"/>
+			<h:outputText id="personBeanPersonGeburtstag" value="#{personBean.person.geburtstag}">
+				<f:convertDateTime type="date"/>
+			</h:outputText>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonVerein" value="Verein:"/>
+			<h:link id="personBeanPersonVerein" outcome="/verein/view" value="#{personBean.person.verein}">
+				<f:param name="id" value="#{personBean.person.verein.id}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="personBeanPersonAnsprechpartnerVerein" value="Ansprechpartner Verein:"/>
+			<h:link id="personBeanPersonAnsprechpartnerVerein" outcome="/verein/view" value="#{personBean.person.ansprechpartnerVerein}">
+				<f:param name="id" value="#{personBean.person.ansprechpartnerVerein.id}"/>
+			</h:link>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

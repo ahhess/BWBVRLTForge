@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{vereinBean.id}"/>
+		<f:event type="preRenderView" listener="#{vereinBean.retrieve}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Verein"/>
+
+	<ui:define name="header">
+		Verein
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Verein
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="vereinBeanVereinSpieler" value="Spieler:"/>
+			<h:dataTable id="vereinBeanVereinSpieler" styleClass="data-table" value="#{forgeview:asList(vereinBean.verein.spieler)}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Vorname"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemVorname" value="#{_item.vorname}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nachname"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemNachname" value="#{_item.nachname}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Strasse"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemStrasse" value="#{_item.strasse}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Plz Ort"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemPlzOrt" value="#{_item.plzOrt}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Email"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemEmail" value="#{_item.email}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="vereinBeanVereinDavor" value="Davor:"/>
+			<h:outputText id="vereinBeanVereinDavor" value="#{vereinBean.verein.davor}"/>
+			<h:outputText/>
+			<h:outputLabel for="vereinBeanVereinName" value="Name:"/>
+			<h:outputText id="vereinBeanVereinName" value="#{vereinBean.verein.name}"/>
+			<h:outputText/>
+			<h:outputLabel for="vereinBeanVereinKurz" value="Kurz:"/>
+			<h:outputText id="vereinBeanVereinKurz" value="#{vereinBean.verein.kurz}"/>
+			<h:outputText/>
+			<h:outputLabel for="vereinBeanVereinRegion" value="Region:"/>
+			<h:outputText id="vereinBeanVereinRegion" value="#{vereinBean.verein.region}"/>
+			<h:outputText/>
+			<h:outputLabel for="vereinBeanVereinBemerkung" value="Bemerkung:"/>
+			<h:outputText id="vereinBeanVereinBemerkung" value="#{vereinBean.verein.bemerkung}"/>
+			<h:outputText/>
+			<h:outputLabel for="vereinBeanVereinAnsprechpartner" value="Ansprechpartner:"/>
+			<h:dataTable id="vereinBeanVereinAnsprechpartner" styleClass="data-table" value="#{forgeview:asList(vereinBean.verein.ansprechpartner)}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Vorname"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemVorname" value="#{_item.vorname}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nachname"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemNachname" value="#{_item.nachname}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Strasse"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemStrasse" value="#{_item.strasse}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Plz Ort"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemPlzOrt" value="#{_item.plzOrt}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Email"/>
+					</f:facet>
+					<h:link outcome="/person/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemEmail" value="#{_item.email}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="vereinBeanVereinMeldungen" value="Meldungen:"/>
+			<h:dataTable id="vereinBeanVereinMeldungen" styleClass="data-table" value="#{forgeview:asList(vereinBean.verein.meldungen)}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Version"/>
+					</f:facet>
+					<h:link outcome="/vereinsmeldung/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemVersion" value="#{_item.version}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Turnier"/>
+					</f:facet>
+					<h:link outcome="/vereinsmeldung/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemTurnier" value="#{_item.turnier}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Bemerkung"/>
+					</f:facet>
+					<h:link outcome="/vereinsmeldung/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemBemerkung" value="#{_item.bemerkung}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

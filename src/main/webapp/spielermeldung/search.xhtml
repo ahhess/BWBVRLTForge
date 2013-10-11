@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value="#{spielermeldungBean.page}"/>
+		<f:event type="preRenderView" listener="#{spielermeldungBean.paginate}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Spielermeldung entities"/>
+
+	<ui:define name="header">
+		Spielermeldung
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Spielermeldung entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="spielermeldungBeanExampleVereinsmeldung" value="Vereinsmeldung:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{vereinsmeldungBean.converter}" id="spielermeldungBeanExampleVereinsmeldung" value="#{spielermeldungBean.example.vereinsmeldung}">
+								<f:selectItem/>
+								<f:selectItems value="#{vereinsmeldungBean.all}"/>
+							</h:selectOneMenu>
+							<h:message for="spielermeldungBeanExampleVereinsmeldung" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="spielermeldungBeanExampleSpieler" value="Spieler:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{personBean.converter}" id="spielermeldungBeanExampleSpieler" value="#{spielermeldungBean.example.spieler}">
+								<f:selectItem/>
+								<f:selectItems value="#{personBean.all}"/>
+							</h:selectOneMenu>
+							<h:message for="spielermeldungBeanExampleSpieler" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action="#{spielermeldungBean.search}" styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action="#{spielermeldungBean.create}" styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="spielermeldungBeanPageItems" styleClass="data-table" value="#{spielermeldungBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Vereinsmeldung"/>
+					</f:facet>
+					<h:link outcome="/spielermeldung/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemVereinsmeldung" value="#{_item.vereinsmeldung}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Spieler"/>
+					</f:facet>
+					<h:link outcome="/spielermeldung/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemSpieler" value="#{_item.spieler}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value="#{spielermeldungBean}"/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>
